@@ -79,12 +79,17 @@ print(model.summary)
 
 If you use this code, please cite:
 
+**Singh, A., Hosanagar, K., & Gandhi, A. (2019). Machine Learning Instrument Variables for Causal Inference.**
+
+Paper: [https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3352957](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3352957)
+
 ```bibtex
-@article{mlaoiv,
-  title={Machine Learning Approximate Optimal Instrumental Variables},
-  author={},
-  journal={},
-  year={}
+@article{singh2019mlaoiv,
+  title={Machine Learning Instrument Variables for Causal Inference},
+  author={Singh, Amandeep and Hosanagar, Kartik and Gandhi, Amit},
+  journal={SSRN Working Paper},
+  year={2019},
+  url={https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3352957}
 }
 ```
 
