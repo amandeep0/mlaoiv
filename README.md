@@ -1,17 +1,28 @@
 # MLAOIV: Machine Learning Approximate Optimal Instrumental Variables
 
-This repository provides examples demonstrating the use of Machine Learning methods to construct Approximate Optimal Instrumental Variables (MLAOIV) for IV-2SLS estimation.
+This repository provides examples demonstrating the use of Machine Learning methods to construct Approximate Optimal Instrumental Variables (MLAOIV) for causal inference. It covers both:
+
+1. **Linear IV-2SLS** — Simple instrumental variables regression with many/weak instruments
+2. **General GMM** — Nonlinear models (e.g., BLP demand) via bi-level optimization that minimizes parameter variance subject to GMM moment conditions
 
 ## Overview
 
-In many IV settings, we have access to many potential instruments. MLAOIV uses machine learning to construct the optimal instrument as $\hat{E}[y_1 | Z]$ using cross-validation, which can improve efficiency over standard IV methods.
+In many IV/GMM settings, we have access to many potential instruments but face efficiency loss from weak instruments or high dimensionality. MLAOIV uses machine learning to construct optimal instruments, improving estimation efficiency.
 
-### Key Idea
+### Key Idea (Linear Case)
 
 Instead of using all instruments $Z$ directly in 2SLS, we:
 1. Use ML to predict the endogenous variable: $\hat{y}_1 = \hat{E}[y_1 | Z]$
 2. Use cross-validation to avoid overfitting
 3. Use $\hat{y}_1$ as the instrument in 2SLS
+
+### Key Idea (General GMM)
+
+For nonlinear GMM, we solve a bi-level optimization:
+- **Outer**: Minimize variance of $\hat{\theta}$
+- **Inner**: Subject to GMM first-order conditions
+
+A neural network learns the optimal instrument transformation $H(Z)$.
 
 ## Examples
 
