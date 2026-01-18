@@ -20,6 +20,38 @@ Instead of using all instruments $Z$ directly in 2SLS, we:
 | `01_many_weak_iv.ipynb` | Basic MLAOIV with many weak instruments (all instruments relevant with small weights) |
 | `02_many_weak_instruments.ipynb` | Comprehensive comparison of ML methods (Lasso, Ridge, ElasticNet, KernelRidge, MLP) |
 | `03_sparse_iv.ipynb` | Sparse instruments setting (only few instruments are strong) |
+| `04_blp_gmm_optimal_iv.ipynb` | **General GMM framework**: BLP demand estimation with learned optimal instruments |
+
+## General GMM Framework (Bi-Level Optimization)
+
+The `04_blp_gmm_optimal_iv.ipynb` notebook demonstrates the general version of MLAOIV for nonlinear GMM estimation, such as BLP demand models.
+
+### The Problem
+
+In GMM estimation, we want to find parameters $\theta$ that satisfy moment conditions:
+$$E[g(Z, \theta)] = 0$$
+
+The GMM estimator minimizes:
+$$\hat{\theta} = \arg\min_\theta \, g(\theta)' W \, g(\theta)$$
+
+### Bi-Level Optimization
+
+MLAOIV solves a **bi-level optimization** problem:
+
+**Outer problem (minimize variance):**
+$$\min_H \text{Var}(\hat{\theta})$$
+
+**Inner problem (GMM estimation):**
+$$\text{subject to: } \hat{\theta} = \arg\min_\theta \, g(\theta)' W(H) \, g(\theta)$$
+
+where $H$ is a neural network that transforms raw instruments $Z$ into optimal instruments.
+
+### Key Insight
+
+The asymptotic variance of GMM is:
+$$V = (G'WG)^{-1} (G'W S_0 W G) (G'WG)^{-1}$$
+
+By learning the instrument transformation $H(Z)$, we can minimize the variance of $\hat{\theta}$ while ensuring the GMM first-order conditions are satisfied.
 
 ## Installation
 
